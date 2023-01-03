@@ -1,0 +1,160 @@
+<!--
+ * @Author: tiecui tiecui@qq.com
+ * @Date: 2023-01-02 13:12:00
+ * @LastEditors: tiecui tiecui@qq.com
+ * @LastEditTime: 2023-01-02 17:29:15
+ * @FilePath: \练习\yingYuecase\index.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <link rel="stylesheet" href="index.css">
+   
+    <div class="music">
+         <!-- marquee滚动样式 {{songName}}当前播放音乐的名字 -->
+         <h2 class="title marquee">{{songName}}</h2>
+     <div class="player"> 
+        <!-- 音乐链接 -->
+      <audio src=""></audio>
+
+      <!-- 歌曲切换按钮 -->
+      <div class="btns">
+        <span class="prev">
+            <ion-icon name="play-back-outline"></ion-icon>
+        </span>
+        <span class="playPause">
+            <ion-icon name="play-outline"></ion-icon>
+        </span>
+        <span class="next">
+            <ion-icon name="play-forward-outline"></ion-icon>
+        </span>
+      </div>
+     </div>
+    </div>
+ 
+    
+
+    <!-- 引入图标库 -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+
+   <script>
+
+    // 获取事件
+    const title = document.querySelector('.title')
+    const prev = document.querySelector('.prev')
+    const playPause = document.querySelector('.playPause')
+    const next = document.querySelector('.next')
+    const audio = document.querySelector('audio')
+
+    // 歌曲列表
+    const songList = [
+        {
+            path:"所念皆星河 - CMJ.mp3",
+            songName:"所念皆星河 - CMJ",
+        },
+        {
+            path:"星河 - AJonnyCool.mp3",
+            songName:"星河 - AJonnyCool",
+        },
+        // {
+        //     path:"薛之谦 - 尘.mp3",
+        //     songName:"薛之谦 - 尘",
+        // },
+    ]
+
+    // song_Playing默认为假false
+    let song_Playing = false
+    // playSong播放函数
+    function playSong(){
+        song_Playing = true
+        // play()播放加载的音频
+        audio.play()
+        // 给playPause添加active样式
+        playPause.classList.add("active")
+        // 修改playPause图标
+        playPause.innerHTML = '<ion-icon name="pause-outline"></ion-icon>'
+    }
+    // pauseSong暂停函数
+    function pauseSong(){
+        song_Playing = false
+        // 暂停播放音频
+        audio.pause()
+        // 给playPause移除active样式
+        playPause.classList.remove("active")
+         // 修改playPause图标
+        playPause.innerHTML = '<ion-icon name="play-outline"></ion-icon>'
+    }
+    
+    //   三元表达式如果条件表达式结果为真 则返回表达式1，如果为假则返回2
+    // 绑定点击事件 如果song_Playing为假fslse 点击按钮后则调用playSong() 如果为真true则调用pauseSong()
+    playPause.addEventListener("click", () => (song_Playing ? pauseSong() : playSong()))
+
+    // loadSong加载函数
+    function loadSong(songList){
+        // 音乐名字等于播放列表里的音乐名字
+        title.textContent = songList.songName
+        // 音乐链接等于播放列表里的mp3
+        audio.src = songList.path
+    }
+
+    // 默认播放第0首歌曲
+    let i = 0
+
+    // 调用loadSong函数
+    loadSong(songList[i])
+
+    
+    // 切换上一首歌曲函数
+    function prevSong(){
+      i--;
+      if(i < 0){
+        i = songList.length -1
+      }
+
+    //   调用loadSong函数
+      loadSong(songList[i])
+    //   调用播放函数方法
+    audio.play()
+     // 修改playPause图标
+     playPause.innerHTML = '<ion-icon name="pause-outline"></ion-icon>'
+     // 给playPause添加active样式
+     playPause.classList.add("active")
+
+    }
+    // 绑定点击事件 点击prev调用prevSong函数
+    prev.addEventListener('click',prevSong)
+
+
+     // 切换下一首歌曲函数
+     function nextSong(){
+      i++;
+      if(i > songList.length -1){
+        i = 0
+      }
+    //   调用loadSong函数
+      loadSong(songList[i])
+    //   调用播放函数方法
+    audio.play()
+     // 修改playPause图标
+     playPause.innerHTML = '<ion-icon name="pause-outline"></ion-icon>'
+     // 给playPause添加active样式
+     playPause.classList.add("active")
+
+    }
+    // 绑定点击事件 点击next调用nextSong函数
+    next.addEventListener('click',nextSong)
+
+
+   </script>
+    
+</body>
+</html>

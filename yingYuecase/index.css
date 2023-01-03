@@ -1,0 +1,145 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    /* 字体类型 */
+    font-family: 'Ubuntu',sans-serif;
+}
+.html,body{
+
+    /* 水平垂直居中 */
+    /* 弹性布局 */
+    display: flex;
+    /* justify-conten定义x轴对齐方式 center水平居中 */
+    justify-content: center;
+    /* 垂直居中 */
+    align-items: center;
+    /* 最小高度为100vh vh相对视窗的高度 vw相对视窗的宽度  */
+    min-height: 100vh;
+
+    background: rgb(188, 199, 244);
+    /* background: #fff; */
+}
+
+
+/* 大盒子样式 */
+.music{
+    /* justify-conten定义x轴对齐方式 center水平居中 */
+    justify-content: center;
+    /* 垂直居中 */
+    align-items: center;
+    /* flex-direction控制盒模型容器下一级子元素的排列方式的属性 column主轴为垂直方向 起点在上沿 */
+    flex-direction: column;
+
+    display: flex;
+}
+
+
+/* 音乐名字样式 */
+.title{
+    color: rgb(69, 112, 139);
+    /* 字体粗细 */
+  font-weight: 400;
+  /* 字体大小 */
+  font-size: 2em;
+  /* inline-flex 当弹性布局(Flex)容器没有设置宽度大小限制时 弹性布局(Flex)的宽度会包裹子item */
+  display: inline-flex;
+  /* 文字居中 */
+  text-align: center;
+
+  /* color: #38a7ff; */
+  margin-bottom: 20px;
+}
+
+
+/* 小盒子样式 */
+.player{
+    /* 相对定位 */
+  position: relative;
+  /* 最小高度100px */
+  min-height: 100px;
+  /* box-shadow阴影效果 inset内阴影，没有insert为外阴影 默认是外阴影 */
+  box-shadow: -10px -10px 15px #fff,
+               10px 10px 15px rgba(0, 0, 0, 0.1),
+               inset -5px -5px 15px #fff,
+               inset 5px 5px 15px rgba(0, 0, 0, 0.1) ;
+  /* 圆角为80 */
+  border-radius: 80px;
+  /* 上下边距是20px;左右边距是30px */
+  padding: 20px 30px;
+
+  width: 500px;
+  background: #fbfbfb;
+  border: 2px solid #fff;
+}
+
+
+/* 歌曲切换按钮样式 */
+.btns{
+    /* 相对定位 */
+  position: relative;
+  /* justify-conten定义x轴对齐方式 space-between两端对齐项目之间的间隔都相等 */
+  justify-content: space-between;
+  
+  width: 100%;
+  display: flex;
+}
+.btns span{
+    /* 相对定位 */
+    position: relative;
+    /* justify-conten定义x轴对齐方式 center水平居中 */
+    justify-content: center;
+    /* 垂直居中 */
+    align-items: center;
+    /* 鼠标样式变为手型图标 */
+    cursor: pointer;
+    /* box-shadow阴影效果 inset内阴影，没有insert为外阴影 默认是外阴影 */
+    box-shadow: inset 0 -5px 5px rgba(0, 0, 0, 0.1),
+                0 5px 10px rgba(0, 0, 0, 0.1),
+                0 10px 15px rgba(0, 0, 0, 0.1);
+
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: #fff;
+    display: flex;
+    color: #777;
+}
+/* :active鼠标点击按钮颜色改变 */
+.btns span:active,.btns span.active{
+    /* box-shadow阴影效果 inset内阴影，没有insert为外阴影 默认是外阴影 */
+    box-shadow: inset 0 -7px 5px rgba(0, 0, 0, 0.025),
+                inset 0 5px 10px rgba(0, 0, 0, 0.15);
+ 
+    color: #ff669a;
+}
+.btns span .playPause{
+    width: 100px;
+    height: 100px;
+}
+.btns span ion-icon{
+    font-size: 2em;
+}
+.btns span.playPause ion-icon{
+    font-size: 3em;
+}
+
+
+/* 滚动音乐名字样式 */
+.marquee{
+    white-space: nowrap;
+    animation-name: translation;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+   }
+ @keyframes translation {
+     from {
+     margin-left: 200px;
+     }
+    
+     to {
+     margin-left: -200px;
+     }
+     
+    } 
